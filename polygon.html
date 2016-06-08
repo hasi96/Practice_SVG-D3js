@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<title>First day</title>
+</head>
+<body>
+<script>
+    var xmlns = "http://www.w3.org/2000/svg";
+
+    var svg = document.createElementNS(xmlns, "svg");
+    svg.setAttributeNS(null,"height","1000");
+    svg.setAttributeNS(null,"width","1000");
+    svg.setAttributeNS(null,"fill","black");
+    document.documentElement.appendChild(svg);
+ 
+function onSubmit() {
+	
+	var path = document.createElementNS(xmlns,"path");
+	var ang  = 360/document.getElementById("sides").value;
+	var a=100+(document.getElementById("padding").value/document.getElementById("sides").value),b=100+(document.getElementById("padding").value/document.getElementById("sides").value);
+	p="M"+a+" "+b+" ";
+	for(var i=0;i<document.getElementById("sides").value;i++)
+	{
+		var x,y,len;
+		var tang = (i+1)*ang;
+		len=document.getElementById("length").value;
+		x=a+Math.cos((tang*22)/(7*180))*len;
+		y=b+Math.sin((tang*22)/(7*180))*len;
+		p = p+"L"+x+" "+y+" "	;
+    	a=x;b=y;
+	}
+    alert(p);
+	path.setAttributeNS(null,"d",p);
+	svg.setAttributeNS(null, "padding-left",document.getElementById("padding").value);
+	path.setAttributeNS(null,"stroke","blue");
+	path.setAttributeNS(null, "radius",document.getElementById("radius").value);
+	svg.appendChild(path);
+}
+
+</script>
+  <form>
+          <label for="sides">Enter number of sides</label>
+          <input id="sides" type="textbox" ></input>
+          
+          <label for="length">Enter length of side</label>
+          <input id="length" type="textbox" ></input>
+
+          <label for="radius">Enter radius for rounding</label>
+          <input id="radius" type="textbox" ></input>
+
+          <label for="padding">Padding</label>
+          <input id="padding" type="textbox" ></input>
+          <input type="button" value="Submit" name="Submit" onclick="onSubmit();" />
+          </form>
+
+</body>
+</html>
